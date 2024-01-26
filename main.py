@@ -21,10 +21,11 @@ def callback_query(call):
     elif call.data == "wrong":
         bot.answer_callback_query(call.id,  "Answer is wrong")
       
-    # Задание 5 - реализуй счетчик вопросов
-
-    # Задание 6 - отправь пользователю сообщение с количеством его набранных очков, если он ответил на все вопросы, а иначе отправь следующий вопрос
-
+    user_responses[call.message.chat.id] += 1
+    if user_responses[call.message.chat.id] > 2:
+        bot.send_message(call.message.chat.id, f"The end!")
+    else:
+        send_question(call.message.chat.id)
 
 @bot.message_handler(commands=['start'])
 def start(message):
