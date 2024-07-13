@@ -22,7 +22,7 @@ def callback_query(call):
         bot.answer_callback_query(call.id,  "Answer is wrong")
       
     user_responses[call.message.chat.id] += 1
-    if user_responses[call.message.chat.id] > 2:
+    if user_responses[call.message.chat.id] > len(quiz_questions):
         bot.send_message(call.message.chat.id, f"The end! your score, @{call.message.chat.username} , is {points[call.message.chat.id]}")
     else:
         send_question(call.message.chat.id)
